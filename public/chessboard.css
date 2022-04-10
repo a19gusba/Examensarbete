@@ -1,0 +1,103 @@
+:root {
+    --clr-light-square: #e6e6e6;
+    --clr-dark-square: #494949;
+    --clr-bg: #161512;
+    --square-size: 60px;
+
+    --clr-primary: #6cd76b;
+    /* 6cd76b, #5ed075, 74e172*/
+    --clr-primary-hover: rgb(166, 242, 165);
+
+    --clr-transparent: rgba(255, 255, 255, 0.5);
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--clr-bg);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.center {
+    margin-top: 5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 4em;
+}
+
+h1, h2 {
+    text-align: center;
+    color: white;
+}
+
+h1 {
+    margin-top: 1.5em;
+    margin-bottom: 0.3em;
+}
+
+h2 {
+    font-size: 1.4rem;
+}
+
+#container {
+    position: relative;
+    width: calc(var(--square-size) * 8);
+    height: calc(var(--square-size) * 8);
+}
+
+.chess-board {
+    display: grid;
+    grid-template-rows: repeat(8, var(--square-size));
+    grid-template-columns: repeat(8, var(--square-size));
+    grid-auto-rows: var(--square-size);
+    width: calc(var(--square-size) * 8);
+    /* 50 x 8 */
+}
+
+.square {
+    width: var(--square-size);
+    height: var(--square-size);
+}
+
+.square.dark {
+    background-color: var(--clr-dark-square);
+    color: var(--clr-light-square);
+}
+
+.square.light {
+    background-color: var(--clr-light-square);
+    color: var(--clr-dark-square);
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: row;
+    column-gap: 1em;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.7em 1.4em;
+    font-size: 1rem;
+    font-weight: bold;
+    border: 2px solid var(--clr-primary);
+    color: var(--clr-primary);
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.btn--active {
+    background-color: var(--clr-primary);
+    color: var(--clr-bg);
+}
+
+.btn:hover:not(.btn--active) {
+    background-color: var(--clr-primary-hover);
+    color: var(--clr-bg);
+    border-color: var(--clr-primary-hover);
+}

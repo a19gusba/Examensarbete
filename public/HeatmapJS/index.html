@@ -6,15 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../chessboard.css">
 </head>
 
 <body>
-    <div id="heatmap-container">
-        <canvas id="canvas"></canvas>
+    <div class="center">
+        <div id="container">
+            <div class="chess-board"></div>
+        </div>
+        <div class="buttons-container">
+            <div class="btn" data-piece-all>All</div>
+        </div>
     </div>
 
+
+    <script src="../chessboard.js"></script>
     <script src="heatmap.js"></script>
+
+    <script src="../dataHandler.js"></script>
     <script src="index.js"></script>
+    <script src="../measure.js"></script>
 </body>
 
 </html>
