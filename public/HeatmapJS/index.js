@@ -1,31 +1,77 @@
-// minimal heatmap instance configuration
+generateChessBoard()
+generateButtons()
+
+// Heatmap
 var heatmapInstance = h337.create({
-    // only container is required, the rest will be defaults
-    container: document.querySelector('#heatmap-container')
+    container: document.getElementById('container')
 });
 
-// now generate some random data
-var points = [];
-var max = 0;
-var width = 600;
-var height = 600;
-var len = 200;
+const canvasElement = document.querySelector(".heatmap-canvas")
+const ctx = canvasElement.getContext("2d")
 
-while (len--) {
-    var val = Math.floor(Math.random() * 100);
-    max = Math.max(max, val);
-    var point = {
-        x: Math.floor(Math.random() * width),
-        y: Math.floor(Math.random() * height),
-        value: val
-    };
-    points.push(point);
+const url = "http://localhost:5000/data/squares"
+
+let squareFrequency
+let maxFrequency
+let data;
+let formatedData;
+
+async function loadData() {
+    data = await getAllData()
 }
-// heatmap data format
-var data = {
-    max: max,
-    data: points
-};
-// if you have a set of datapoints always use setData instead of addData
-// for data initialization
-heatmapInstance.setData(data)
+
+async function formatData(piece) {
+    let movesData = await formatDataMoves(data)
+    formatedData = await formatDataSquares(movesData, piece)
+
+    let [max, all] = await getMostFrequentSquare(formatedData)
+    maxFrequency = max
+    squareFrequency = all
+
+    console.log(squareFrequency)
+}
+
+async function render() {
+    ctx.clearRect(0, 0, canvasElement.width, canvasElement.height)
+
+    var points = [];
+    for (let square in squareFrequency) {
+        var coord = getCoordByNotation(square)
+        var point = {
+            x: coord.x,
+            y: coord.y,
+            value: squareFrequency[square],
+            radius: squareSize
+        };
+        points.push(point);
+    }
+    heatmapInstance.setData({ max: maxFrequency, data: points });
+}
+
+async function render_OLD() {
+    // Clear canvas
+    ctx.clearRect(0, 0, canvasElement.width, canvasElement.height)
+
+    var points = [];
+    formatedData.forEach(square => {
+        var coord = getCoordByNotation(square)
+        var point = {
+            x: coord.x,
+            y: coord.y,
+            value: 1,
+            radius: 60
+        };
+        points.push(point);
+    });
+
+    var data2 = {
+        max: maxFrequency,
+        data: points
+    };
+
+    heatmapInstance.setData(data2);
+}
+
+
+
+
