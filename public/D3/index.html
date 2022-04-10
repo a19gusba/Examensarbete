@@ -1,15 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
-<body>
-    <div id="heatmap-container"></div>
-
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../chessboard.css">
     <script src="https://d3js.org/d3.v4.js"></script>
+</head>
+
+<body>
+    <h1>Chess visualization with heatmap</h1>
+    <h2>D3.js</h2>
+    <div class="center">
+        <div id="container">
+            <div id="test"></div>
+        </div>
+        <div class="buttons-container">
+            <div class="btn" data-piece-all>All</div>
+        </div>
+    </div>
+    
+
+    <script src="../chessboard.js"></script>
+    <script src="../dataHandler.js"></script>
+
     <script src="index.js"></script>
+    <script src="../measure.js"></script>
 </body>
+
 </html>

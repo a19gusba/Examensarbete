@@ -1,0 +1,12 @@
+.container {
+    width: 550px;
+    height: 500px;
+    border: 1px solid red;
+    display: flex;
+    justify-content: space-around;
+}
+
+.bar {
+    background-color: rgb(97, 43, 97);
+    background-color: rgba(17, 243, 111, 0.004);
+}
