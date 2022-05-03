@@ -2,32 +2,32 @@ let startTime
 let stopTime
 
 let currentResult
-let allResults = { dataLoadTime: "", games: 1000, loaded: [] }
+let allResults = { dataLoadTime: "", games: 100000, loaded: [] }
 let isLoaded = false
 
 let libraries = ["heatmap", "d3"]
-let repeat = { repeat: true, am: 1, current: 0, library: "D3" }
+let repeat = { repeat: true, am: 100, current: 0, library: "heatmapJS" }
 
 function startTimer() {
     currentResult = { format: "", render: "", total: "" }
-    startTime = new Date();
+    startTime = performance.now();
 }
 
 function setTimestamp(type) {
-    result[type] = new Date()
+    result[type] = performance.now()
 }
 
 function timestampFormat() {
-    result.load = startTime - new Date()
+    result.load = startTime - performance.now()
 }
 
 async function stopTimer() {
-    stopTime = new Date()
+    stopTime = performance.now()
 
     currentResult.total = currentResult.format + currentResult.render
     allResults.loaded.push(currentResult)
 
-    console.log(repeat.current)
+    /* console.log(repeat.current) */
 
     if (repeat.repeat == false) return
     repeat.current++
@@ -49,31 +49,31 @@ async function beginMeasure() {
 }
 
 async function measureLoad() {
-    console.log("Starting data load")
-    let startDate = new Date()
+    /* console.log("Starting data load") */
+    let startDate = performance.now()
     await loadData()
-    allResults.dataLoadTime = new Date() - startDate
+    allResults.dataLoadTime = performance.now() - startDate
     isLoaded = true
 
-    console.log("Data loaded")
+    /* console.log("Data loaded") */
 }
 
 async function measureFormat() {
-    let startDate = new Date()
+    let startDate = performance.now()
     await formatData()
-    currentResult.format = new Date() - startDate
+    currentResult.format = performance.now() - startDate
 }
 
 async function measureRender() {
-    let startDate = new Date()
+    let startDate = performance.now()
     await render()
-    currentResult.render = new Date() - startDate
+    currentResult.render = performance.now() - startDate
 }
 
 function downloadResults() {
     let dateObj = new Date().toLocaleDateString('en-GB');
     let dateStr = dateObj.toString().replaceAll("/", "_")
-    let fileName = `${repeat.library}_DATA_${dateStr}`
+    let fileName = `${repeat.library}_DATA_${dateStr}_games-${allResults.games}`
     // Create download element
     var htmlElement = `<a id="downloadObElement" style="display:none"></a>`;
     document.querySelector("#container").insertAdjacentHTML("beforeend", htmlElement)
@@ -83,12 +83,12 @@ function downloadResults() {
     var e = document.getElementById('downloadObElement');
     e.setAttribute("href", dataStr);
     e.setAttribute("download", `${fileName}.json`);
-    /* e.click(); */
+    e.click();
 
     // Remove element
     e.parentNode.removeChild(e);
 
-    console.log(allResults)
+    /* console.log(allResults) */
 }
 
 

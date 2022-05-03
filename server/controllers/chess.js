@@ -20,7 +20,7 @@ async function readFile(filePath) {
 
 const getAllData = async (req, res) => {
     try {
-        let games = await gameModel.find().limit(10)
+        let games = await gameModel.find().limit(100000)
         res.send(games)
     } catch (error) {
         res.send({ message: error })
