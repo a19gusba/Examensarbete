@@ -30,12 +30,13 @@ async function formatData(piece) {
     formatedData = await formatDataSquares(movesData, piece)
 
     let [max, all] = await getMostFrequentSquare(formatedData)
-    maxFrequency = max
+    maxFrequency = max * 1
     squareFrequency = all
 
     myColor = d3.scaleLinear()
-        .range(["rgba(255, 255, 255, 0)", "#00C2D1"]) /* 00C2D1 DB504A*/
-        .domain([1, maxFrequency])
+        // .range(["rgba(255, 255, 255, 0)", "#7EE081"])
+        .range(["#000000", "#00C2D1"]) /* 00C2D1 DB504A 7EE081*/
+        .domain([0, maxFrequency])
 }
 
 function setupSvg() {

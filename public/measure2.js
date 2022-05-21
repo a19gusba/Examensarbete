@@ -2,11 +2,11 @@ let startTime
 let stopTime
 
 let currentResult
-let allResults = { dataLoadTime: "", games: 100000, loaded: [] }
+let allResults = { dataLoadTime: "", games: 1000, loaded: [] }
 let isLoaded = false
 
 let libraries = ["heatmap", "d3"]
-let repeat = { repeat: true, am: 100, current: 0, library: "heatmapJS" }
+let repeat = { repeat: true, am: 100, current: 0, library: "D3" }
 
 function startTimer() {
     currentResult = { format: "", render: "", total: "" }
